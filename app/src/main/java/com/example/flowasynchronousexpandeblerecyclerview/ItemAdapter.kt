@@ -41,7 +41,7 @@ class ItemAdapter(
 
         holder.binding.itemLayout.setOnClickListener {
 
-            onClick.onclick()
+            onClick.onclick(person)
 //            subListAdapter.submitList(person.pets)
             notifyDataSetChanged()
 //            notifyItemChanged(position)

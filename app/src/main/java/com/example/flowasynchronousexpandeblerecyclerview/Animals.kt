@@ -7,17 +7,17 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
-// Класс домашнего животного
+
 data class Animal(val name: String, val species: String)
 
-// Класс человека
+
 data class Person(val name: String, val pets: List<Animal>)
 
-// Репозиторий для получения данных
+
 
 
 suspend fun main() {
-    // Получение Flow списка животных и его обработка
+
     val animalsFlow = Repository.getAnimalsFlow()
 //    animalsFlow.collect { animals ->
 //        println("Список животных:")
@@ -26,7 +26,7 @@ suspend fun main() {
 //        }
 //    }
 
-    // Получение Flow списка людей и его обработка
+
     val personsFlow = Repository.getPersonsFlow()
 //    personsFlow.collect { persons ->
 //        println("Список людей и их домашних животных:")

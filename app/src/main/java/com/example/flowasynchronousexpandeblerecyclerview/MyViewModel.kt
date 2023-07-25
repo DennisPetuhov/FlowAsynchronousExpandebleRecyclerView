@@ -1,5 +1,6 @@
 package com.example.flowasynchronousexpandeblerecyclerview
 
+import android.media.metrics.PlaybackErrorEvent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.flowasynchronousexpandeblerecyclerview.Flow.Repository
@@ -25,23 +26,24 @@ class MyViewModel : ViewModel() {
         }
     }
 
-    fun getPersonFlowWithPets() {
+    fun getPersonFlowWithPets(item: Person) {
         viewModelScope.launch {
-            combine(repository.getPersonsFlow(), repository.getAnimalsFlow()) { person, animals ->
-
-                val newFlow = person.map { person ->
-                    person.copy(pets = person.pets + animals)
-
+            combine(
+                repository.getPersonsFlow(),
+                repository.getAnimalsFlow()
+            ) { listOfPerson, listOfAnimals ->
+                val newFlow = listOfPerson.map { person ->
+                    if (person.name == item.name) {
+                        person.copy(pets = person.pets + listOfAnimals)
+                    } else {
+                        person
+                    }
                 }
-                println("@@@" + newFlow.toString())
-                newFlow
-
+                return@combine newFlow
             }.collect {
                 myMainFlow.emit(it)
-                println("###" + it)
+
             }
-
-
         }
     }
 }
