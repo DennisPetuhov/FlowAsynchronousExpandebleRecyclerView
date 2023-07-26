@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.flowasynchronousexpandeblerecyclerview.Flow.Repository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 
 import kotlinx.coroutines.flow.combine
 
@@ -46,4 +47,25 @@ class MyViewModel : ViewModel() {
             }
         }
     }
+
+
+    fun getPersonFlowWithPetsStateFlow(item: Person) {
+        viewModelScope.launch {
+
+
+            repository.getAnimalsFlow().collect{
+                    listOfAnimals ->
+                val newFlow = myMainFlow.value.map { person ->
+                    if (person.name == item.name) {
+                        person.copy(pets = person.pets + listOfAnimals)
+                    } else {
+                        person
+                    }
+                }
+//                return@combine newFlow
+                myMainFlow.emit(newFlow)
+            }
+        }
+    }
+
 }

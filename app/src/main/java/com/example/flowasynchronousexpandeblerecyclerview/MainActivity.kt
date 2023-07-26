@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), OnClick {
     }
 
     override fun onclick(item: Person) {
-        myViewModel.getPersonFlowWithPets(item)
+        myViewModel.getPersonFlowWithPetsStateFlow(item)
     }
 
 
