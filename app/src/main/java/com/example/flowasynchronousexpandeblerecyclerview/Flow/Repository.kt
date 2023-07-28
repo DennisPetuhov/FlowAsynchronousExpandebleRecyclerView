@@ -2,6 +2,7 @@ package com.example.flowasynchronousexpandeblerecyclerview.Flow
 
 import com.example.flowasynchronousexpandeblerecyclerview.Animal
 import com.example.flowasynchronousexpandeblerecyclerview.Person
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -20,6 +21,7 @@ object Repository {
             Animal("Мурзик", "Кот"),
             Animal("Тузик", "Собака")
         )
+        delay(3000)
         emit(animals)
 
     }

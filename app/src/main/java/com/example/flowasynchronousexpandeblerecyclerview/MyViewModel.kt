@@ -62,7 +62,6 @@ class MyViewModel : ViewModel() {
                         person
                     }
                 }
-//                return@combine newFlow
                 myMainFlow.emit(newFlow)
             }
         }

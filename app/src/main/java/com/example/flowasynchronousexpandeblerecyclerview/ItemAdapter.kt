@@ -31,27 +31,28 @@ class ItemAdapter(
 
 
         val subListAdapter = SubListAdapter()
-        subListAdapter.submitList(person.pets)
+        subListAdapter.submitList(person.pets.toList())
         holder.binding.subRecyclerView.adapter = subListAdapter
         val layoutManager = LinearLayoutManager(
             holder.binding.root.context,
-            LinearLayoutManager.HORIZONTAL,
-            false)
+            LinearLayoutManager.VERTICAL,
+            false
+        )
         holder.binding.subRecyclerView.layoutManager = layoutManager
 
         holder.binding.itemLayout.setOnClickListener {
 
-            onClick.onclick(person)
-//            subListAdapter.submitList(person.pets)
-            notifyDataSetChanged()
-//            notifyItemChanged(position)
 
 
             if (holder.binding.subRecyclerView.isVisible) {
                 holder.binding.subRecyclerView.visibility = View.GONE
             } else {
+                onClick.onclick(person)
+                subListAdapter.notifyDataSetChanged()
+
                 holder.binding.subRecyclerView.visibility = View.VISIBLE
             }
+
         }
 
     }
